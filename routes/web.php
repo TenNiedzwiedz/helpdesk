@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main');
+});
+
+Route::controller(UsersController::class)->group(function () {
+    Route::get('users', 'viewAll');
+    Route::get('users/new', 'create');
+    Route::post('users', 'store');
 });
