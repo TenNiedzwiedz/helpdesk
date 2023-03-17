@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,9 @@ Route::get('/', function () {
     return view('main');
 });
 
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/auth', [LoginController::class, 'authenticate']);
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth', [AuthController::class, 'authenticate']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::controller(UsersController::class)->group(function () {
     Route::get('users', 'viewAll');
