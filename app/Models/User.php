@@ -34,7 +34,34 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function role() {
-        $this->belongsTo(Role::class);
+    public function customer() {
+        return $this->hasOne(Customer::class);
     }
+
+    public function isCustomer() {
+        return $this->customer()->exists();
+    }
+
+    public function employee() {
+        return $this->hasOne(Employee::class);
+    }
+
+    public function isEmployee() {
+        return $this->employee()->exists();
+    }
+
+    public function manager() {
+        return $this->hasOne(Manager::class);
+    }
+
+    public function isManager() {
+        return $this->manager()->exists();
+    }
+
+    public function role() {
+        if($this->isCustomer()) return 'Customer';
+        if($this->isEmployee()) return 'Employee';
+        if($this->isManager()) return 'Manager';
+    }
+
 }
