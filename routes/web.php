@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('main');
 });
 
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/auth', [LoginController::class, 'authenticate']);
+Route::get('/logout', [LoginController::class, 'logout']);
+
 Route::controller(UsersController::class)->group(function () {
     Route::get('users', 'viewAll');
     Route::get('users/new', 'create');

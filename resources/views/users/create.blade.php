@@ -10,7 +10,7 @@
             <form method="POST" action="/users" class="form-group">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Imię i nazwisko</label>
+                    <label for="name">Typ konta</label>
                     <select name="role"
                         class="form-control form-select @error('name') is-invalid @enderror">
                             <option hidden>Wybierz typ użytkownika</option>
