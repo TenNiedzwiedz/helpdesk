@@ -26,7 +26,7 @@
                 <div class="card-body">
                     Data zgłoszenia: {{ $submission->created_at->format('Y-m-d')}}</br>
                     Autor: {{ $submission->author->name }} </br>
-                    Przypisany: {{ $submission->assigned->name ?? 'brak'}}
+                    Przypisany: {{ $submission->assignedUser->name ?? 'brak'}}
                 </div>
             </div>
         </div>
