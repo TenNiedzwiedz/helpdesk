@@ -24,7 +24,7 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td><a href="{{ url('/users')}}/{{ $user->id}}">{{ $user->name }}</a></td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->role() }}</td>
+                    <td>{{ $user->role->name }}</td>
                     <td>{{ $user->created_at->format('Y-m-d') }}</td>
                 </tr>
                 @endforeach

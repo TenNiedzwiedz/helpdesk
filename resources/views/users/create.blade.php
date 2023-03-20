@@ -11,11 +11,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Typ konta</label>
-                    <select name="role"
+                    <select name="role_id"
                         class="form-control form-select @error('name') is-invalid @enderror">
                             <option hidden>Wybierz typ użytkownika</option>
-                        @foreach($roles as $key => $role)
-                            <option value="{{ $key }}">{{ $role }}</option>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
                         @endforeach
                     </select>
                     

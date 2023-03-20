@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Manager;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,11 +19,7 @@ class UsersController extends Controller
     }
 
     public function create() {
-        $roles = [
-            1 => 'Customer',
-            2 => 'Employee',
-            3 => 'Manager'
-        ];
+        $roles = Role::all();
 
         return view('users.create', compact('roles'));
     }
@@ -31,20 +28,9 @@ class UsersController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role_id,
         ]);
-
-        switch($request->role) {
-            case 1:
-                $user->customer()->save(new Customer());
-                break;
-            case 2:
-                $user->employee()->save(new Employee());
-                break;
-            case 3:
-                $user->manager()->save(new Manager());
-                break;
-        }
 
         return redirect('users');
     }
