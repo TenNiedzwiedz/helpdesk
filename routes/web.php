@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SubmissionsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,11 @@ Route::controller(UsersController::class)->group(function () {
     Route::get('users', 'viewAll');
     Route::get('users/new', 'create');
     Route::post('users', 'store');
+});
+
+Route::controller(SubmissionsController::class)->group(function () {
+    Route::get('submissions', 'viewAll');
+    Route::get('submissions/new', 'create');
+    Route::post('submissions', 'store');
+    Route::get('submissions/{id}', 'view');
 });
