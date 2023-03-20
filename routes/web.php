@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ResponsesController;
 use App\Http\Controllers\SubmissionsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -35,4 +36,8 @@ Route::controller(SubmissionsController::class)->group(function () {
     Route::get('submissions/new', 'create');
     Route::post('submissions', 'store');
     Route::get('submissions/{id}', 'view');
+});
+
+Route::controller(ResponsesController::class)->group(function () {
+    Route::post('response/{type}/{submission_id}', 'store');
 });

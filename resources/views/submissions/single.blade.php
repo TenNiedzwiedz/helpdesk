@@ -17,6 +17,16 @@
                     {{ $submission->content }}
                 </div>
             </div>
+            @foreach($submission->responses as $response)
+                @switch($response->type)
+                    @case(1)
+                        <x-responses.view-response.public-response :response="$response"/>
+                        @break
+                    @case(2)
+                        <x-responses.view-response.private-response :response="$response"/>
+                        @break
+                @endswitch
+            @endforeach
         </div>
         <div class="col">
             <div class="card shadow mb-4">
@@ -32,6 +42,8 @@
         </div>
     </div>
 </div>
+
+<x-responses.add-response.public-response :submission="$submission"/>
 
 
 @endsection

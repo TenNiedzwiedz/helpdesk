@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Submission extends Model
+class Response extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -16,10 +16,11 @@ class Submission extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
+        'submission_id',
+        'type',
         'content',
         'author_id',
-        'status',
+        'assigned_id',
     ];
 
     public function author() {
@@ -28,9 +29,5 @@ class Submission extends Model
 
     public function assignedUser() {
         return $this->belongsTo(User::class, 'assigned_id');
-    }
-
-    public function responses() {
-        return $this->hasMany(Response::class);
     }
 }
