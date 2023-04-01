@@ -43,7 +43,6 @@
     </div>
 </div>
 
-<x-responses.add-response.public-response :submission="$submission"/>
-
+<livewire:load-response-component :submission="$submission">
 
 @endsection
