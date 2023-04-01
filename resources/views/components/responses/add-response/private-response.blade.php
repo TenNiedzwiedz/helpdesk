@@ -1,5 +1,5 @@
 <div>
-    <form method="POST" action="/response/1/{{ $submission->id }}" class="form-group">
+    <form method="POST" action="/response/2/{{ $submission->id }}" class="form-group">
         @csrf
         <div class="form-group">
             <label for="content">Treść</label>
