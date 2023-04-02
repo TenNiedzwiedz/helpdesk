@@ -24,7 +24,7 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $submission->author->name }}</td>
                     <td><div class="d-flex align-items-center"><x-submissions.status :submission="$submission"></x-submissions.status><a href="{{ url('/submissions')}}/{{ $submission->id}}">{{ $submission->title }}</a></div></td>
-                    <td>{{ $submission->assigned->name ?? 'brak' }}</td>
+                    <td>{{ $submission->assignedUser->name ?? 'brak' }}</td>
                     <td>{{ $submission->created_at->format('Y-m-d') }}</td>
                 </tr>
                 @endforeach
