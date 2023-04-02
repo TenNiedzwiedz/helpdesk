@@ -25,6 +25,9 @@
                     @case(2)
                         <x-responses.view-response.private-response :response="$response"/>
                         @break
+                    @case(3)
+                        <x-responses.view-response.close-as-wrong-response :response="$response"/>
+                        @break
                 @endswitch
             @endforeach
         </div>
