@@ -2,34 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreResponseRequest;
 use App\Models\Response;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ResponsesController extends Controller
 {
     /**
-     * Stores a new response for a submission.
+     * Store a newly created response in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     *         The HTTP request instance containing the response data.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     *         A redirect response to the submission view page.
+     * @param  \App\Http\Requests\StoreResponseRequest  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreResponseRequest $request)
     {
-        // Create a new response with the given data.
+        // Retrieve validated data from the request
+        $validated = $request->validated();
+
+        // Create a new response with the given data
         $response = Response::create([
-            'submission_id' => $request->submission_id,
-            'type' => $request->type,
-            'content' => $request->content ?? '',
-            'author_id' => Auth::id(),
-            'assigned_id' => $request->assigned_id ?? null,
+            'submission_id' => $validated['submission_id'],
+            'type' => $validated['type'],
+            'content' => $validated['content'] ?? '',
+            'author_id' => $validated['author_id'],
+            'assigned_id' => $validated['assigned_id'] ?? null,
         ]);
 
-        // Redirect the user to the submission view page.
-        return redirect('submissions/'.$request->submission_id);
+        // Update submission status if the response type is 3
+        switch ($validated['type']) {
+            case 3:
+                $submission = Submission::findOrFail($validated['submission_id']);
+                $submission->status = 3;
+                $submission->save();
+                break;
+        }
+
+        // Redirect the user to the submission view page
+        return redirect('submissions/'.$validated['submission_id']);
     }
 
 }
